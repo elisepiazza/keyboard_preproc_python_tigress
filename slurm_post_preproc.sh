@@ -6,10 +6,10 @@
 #SBATCH --error=logfiles/preproc_data%j.err
 #SBATCH -p all
 #SBATCH -t 1000
-#SBATCH -c 20 --mem 70000
+#SBATCH -c 5 --mem 1000
 #SBATCH --mail-type ALL
 #SBATCH --mail-user epiazza@princeton.edu
-#SBATCH --array=0-10
+#SBATCH --array=0-5
 
 module load pyger
 export PYTHONMALLOC=debug
