@@ -10,7 +10,8 @@ s = int(sys.argv[1])
 
 datadir = "/tigress/epiazza/keyboard/data/"
 
-subj_ids = ['sub-121', 'sub-120']
+subj_ids = ['sub-103', 'sub-105', 'sub-108', 'sub-117', 'sub-120', 'sub-121']
+#subj_ids = ['sub-103']
 
 task_fn1 = '_ses-01_task-keyboard_run-'
 task_fn2 = '_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz'
@@ -37,7 +38,7 @@ for s in range(len(subj_ids)):
             # load epi data
             data = nib.load(datadir + subj_ids[s] + '/' + subj_ids[s] + task_fn1 + str(r+1) + task_fn2)
             # load confounds
-            dfObj = pd.read_csv(subj_ids[s] + task_fn1 + str(r+1) + confounds_suffix, sep='\t')
+            dfObj = pd.read_csv(datadir + subj_ids[s] + '/' + subj_ids[s] + task_fn1 + str(r+1) + confounds_suffix, sep='\t')
             # load mask
             mask_img = nib.load(datadir + subj_ids[s] + '/' + subj_ids[s] + task_fn1 + str(r+1) + mask_fn_suffix)
           
