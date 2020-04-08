@@ -15,7 +15,7 @@ import pandas as pd
 #subjs = ['sub-103','sub-105','sub-108','sub-117','sub-120','sub-121', 'sub-122', 'sub-123']
 #groups = ['AM', 'M', 'M', 'M', 'AM', 'M', 'M', 'AM']
 
-subjs = ['sub-103','sub-105']
+subjs = ['sub-105','sub-117', 'sub-121', 'sub-122']
 
 datadir = '/tigress/epiazza/keyboard/data/'
 save_dir = '/tigress/epiazza/keyboard/results/isc/'
@@ -58,4 +58,8 @@ for c in range(len(conds)):
     iscs = isc(avgData, pairwise=False)
     # Save ISCs 
     np.save(save_dir + conds[c] + '_iscs',iscs) 
+
+    #Remove 3rd (singleton) dim and save individual time series
+    avgData_tosave = np.squeeze(avgData) 
+    np.savetxt(save_dir + conds[c] + '_avgData.txt', avgData_tosave, delimiter =',')
 
