@@ -10,7 +10,7 @@ s = int(sys.argv[1])
 
 datadir = "/tigress/epiazza/keyboard/data/"
 
-subj_ids = ['sub-108']
+subj_ids = ['sub-122', 'sub-123']
 #subj_ids = ['sub-103', 'sub-105', 'sub-108', 'sub-117', 'sub-120', 'sub-121']
 
 task_fn1 = '_ses-01_task-keyboard_run-'
