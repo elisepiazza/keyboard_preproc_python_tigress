@@ -9,7 +9,7 @@
 #SBATCH -c 10 --mem 50000
 #SBATCH --mail-type ALL
 #SBATCH --mail-user epiazza@princeton.edu
-#SBATCH --array=0-1
+#SBATCH --array=0-6
 
 module load pyger/0.9.1
 export PYTHONMALLOC=debug
