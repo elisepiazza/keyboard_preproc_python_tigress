@@ -4,6 +4,7 @@ import numpy.ma as ma
 from scipy.stats import zscore
 from isc_standalone import isc
 from nilearn.masking import apply_mask
+from nilearn.masking import compute_epi_mask
 import matplotlib.pyplot as plt
 from scipy import stats
 from nilearn.signal import clean
@@ -11,44 +12,48 @@ import pandas as pd
 
 # This script calls the brainiak isc and isfc function to perform full brain isc on keyboard data.
 
+#subjs = ['sub-103','sub-105','sub-108','sub-117','sub-120','sub-121']
 
-# subjs
-subjs = ['sub-103','sub-105','sub-108','sub-117','sub-120','sub-121']
+subjs = ['sub-103','sub-105']
 
-#datadir = '/jukebox/hasson/elise/fMRI/fmriprep/keyboard/data/bids/derivatives/fmriprep/'
 datadir = '/tigress/epiazza/keyboard/data/'
+save_dir = '/tigress/epiazza/keyboard/results/isc/'
 
-#fn_run = 'clean_data_run_smoothed_3mm.nii.gz'
-
-mask = nib.load('/tigress/epiazza/keyboard/rois/rA1_mask_25mm.nii.gz')
+mask = nib.load('/tigress/epiazza/keyboard/rois/a1plus_3mm_bin.nii.gz')
 mask_size = mask.get_data()[mask.get_data()==1].shape[0]
 condition_data = pd.read_csv('/tigress/epiazza/keyboard/data/Conditions.csv')
 
-data = np.empty((6455,mask_size,len(subjs)))
+conds = ['I', '8B', '2B', '1B']
 
-TR = 1
+TR = 1.7
 high_pass = 0.01
 nRuns = 18
+nTR = 148
 
 # Structure data for brainiak isc function
-for i in range(len(subjs)):
-    for r in range(nRuns):
-    data = zscore(apply_mask(datadir + subjs[i] + '/clean_data/clean_data_run' + str(r) + '.nii.gz', mask)[0:3240,:])
-    #data = zscore(apply_mask(datadir + subjs[i] + '/ses-01/func/' + subjs[i] + 'clean_data_run' , mask)[0:3240,:])
-    #data = np.vstack((data_run1,data_run2))
-    ## Compute mean signal
-    mu = data.mean(axis=0)
-    ## Apply highpass data.
-    data = clean(data, detrend=True, standardize=False, high_pass=high_pass, t_r=TR)
-    ## Convert to percent signal change.
-    data[:,:,i] = data
+for c in range(len(conds)):
+    # Initialize data structure for each condition separately, which will go into ISC
+    data = np.empty((nTR, mask_size, len(subjs)))    
+    for s in range(len(subjs)):
+        # Select subject-specific column containing condition labels
+        subj_col = condition_data.loc[:, subjs[s]]
+        # Select indices corresponding to current condition
+        idx = np.where(subj_col == conds[c])[0] + 1
+        # Initialize structure for storing average run data across subjects
+        avgRuns = np.empty((nTR,mask_size))    
+        for r in range(len(idx)):
+            # Load run data 
+            runData = nib.load(datadir + subjs[s] + '/clean_data/clean_data_run' + str(idx[r]) + '.nii.gz')
+            # Mask data
+            masked_data = apply_mask(runData, mask)
+            # Average current run into existing data structure
+            avgRuns += masked_data/len(idx)
+        # Store average run data for each subject separately
+        data[:,:,s] = avgRuns       
+    # Average over all voxels before feeding to ISC   
+    avgData = np.mean(data,axis=1,keepdims=True) 
+    # Run ISC!!!        
+    iscs = isc(avgData, pairwise=False)
+    # Save ISCs 
+    np.save(savedir + conds[c] + '_iscs',iscs) 
 
-data_mean = np.mean(data,axis=1,keepdims=True)
-iscs = isc(data_mean, pairwise=False)
-
-# save isc data
-print('Saving ISC Results')
-#FIX!!!
-save_dir = '/jukebox/norman/jamalw/Eternal_Sunshine/scripts/data/'
-np.save(save_dir + 'isc/rA1',iscs)
-np.save(save_dir + 'subj_data/roi_data/rA1',data)
