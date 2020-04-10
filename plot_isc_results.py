@@ -2,13 +2,24 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
 
-datadir = '/jukebox/norman/jamalw/Eternal_Sunshine/scripts/data/isc/'
+datadir = '/tigress/epiazza/keyboard/results/isc/'
 
-music = np.load(datadir + 'music_group_rA1.npy')
-no_music = np.load(datadir + 'no_music_group_rA1.npy')
+group = 'AM'
+conds = ['I', '8B', '2B', '1B']
 
-music_iscs = music[~np.isnan(music)]
-no_music_iscs = no_music[~np.isnan(no_music)]
+
+I = np.load(datadir + 'I_iscs_' + group + '.npy')
+ISC_I = I[~np.isnan(I)]
+
+8B = np.load(datadir + '8B_iscs_' + group + '.npy')
+ISC_8B = 8B[~np.isnan(8B)]
+
+2B = np.load(datadir + '2B_iscs_' + group + '.npy')
+ISC_2B = 2B[~np.isnan(2B)]
+
+1B = np.load(datadir + '1B_iscs_' + group + '.npy')
+ISC_1B = 1B[~np.isnan(1B)]
+
 
 # plot data and save figure
 x = np.arange(2)
