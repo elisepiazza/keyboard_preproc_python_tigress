@@ -4,7 +4,7 @@ from scipy import stats
 
 datadir = '/tigress/epiazza/keyboard/results/isc/'
 
-group = 'AM'
+group = 'M'
 conds = ['I', '8B', '2B', '1B']
 
 
@@ -23,4 +23,4 @@ plt.xticks(x,('I','8B','2B','1B'),fontsize=15)
 plt.title('ISC Across Scrambled Conditions (rA1)',fontsize=20)
 plt.ylabel('ISC (r)',fontsize=15)
 plt.tight_layout()
-plt.savefig(datadir + 'isc_results_rA1')
+plt.savefig(datadir + 'isc_results_rA1_' + group)
