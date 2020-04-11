@@ -15,8 +15,8 @@ import pandas as pd
 #subjs = ['sub-103','sub-105','sub-108','sub-117','sub-120','sub-121', 'sub-122', 'sub-123']
 #groups = ['AM', 'M', 'M', 'M', 'AM', 'M', 'M', 'AM']
 
-group = 'AM'
-subjs = ['sub-103', 'sub-120', 'sub-123']
+group = 'M'
+subjs = ['sub-105', 'sub-117', 'sub-121', 'sub-122']
 
 datadir = '/tigress/epiazza/keyboard/data/'
 save_dir = '/tigress/epiazza/keyboard/results/isc/'
