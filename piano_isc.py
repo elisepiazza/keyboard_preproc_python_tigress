@@ -63,4 +63,4 @@ for c in range(len(conds)):
     #Remove 3rd (singleton) dim and save individual time series
     avgData_tosave = np.squeeze(avgData) 
     np.savetxt(save_dir + conds[c] + '_avgData_' + group + '.txt', avgData_tosave, delimiter =',')
-
+    np.save(save_dir + conds[c] + '_avgData_' + group, avgData_tosave) 
