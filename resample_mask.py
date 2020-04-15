@@ -2,13 +2,11 @@ import numpy as np
 import nibabel as nib
 from nilearn.image import resample_img
 
-piano_fn = '/jukebox/hasson/elise/fMRI/fmriprep/keyboard/data/bids/derivatives/fmriprep/sub-103/ses-01/func/sub-103_ses-01_task-keyboard_run-18_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz'
-
 # load output affine matrix
-output_affine = nib.load(piano_fn).affine
+output_affine = nib.load('/tigress/epiazza/keyboard/rois/MNI152_T1_3mm_brain.nii.gz').affine
 
 # load data to be resampled
-input_data = nib.load('/jukebox/norman/jamalw/MES/data/MNI152_T1_2mm_brain.nii')
+input_data = nib.load('/tigress/jamalw/MES/data/erez_dmna_network_2mm_bin_fixed.nii')
 
 img_in_mm_space = resample_img(input_data, target_affine=output_affine,
                                target_shape=(65, 77, 65))
@@ -24,6 +22,6 @@ minval = np.min(mask_bin)
 img = nib.Nifti1Image(mask_bin, affine=output_affine)
 img.header['cal_min'] = minval
 img.header['cal_max'] = maxval
-nib.save(img, '/jukebox/norman/jamalw/Eternal_Sunshine/data/nifti/MNI152_T1_3mm_brain.nii.gz')
+nib.save(img, '/tigress/epiazza/keyboard/rois/erez_dmna_3mm_bin.nii.gz')
 
 
