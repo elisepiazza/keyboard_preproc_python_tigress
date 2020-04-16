@@ -21,7 +21,7 @@ subjs = ['sub-105', 'sub-117', 'sub-121', 'sub-122']
 datadir = '/tigress/epiazza/keyboard/data/'
 save_dir = '/tigress/epiazza/keyboard/results/isc/'
 
-mask = nib.load('/tigress/epiazza/keyboard/rois/a1plus_3mm_bin.nii.gz')
+mask = nib.load('/tigress/epiazza/keyboard/rois/pieman_a1_3mm.nii.gz')
 mask_size = mask.get_data()[mask.get_data()==1].shape[0]
 condition_data = pd.read_csv('/tigress/epiazza/keyboard/data/Conditions.csv')
 
@@ -62,5 +62,5 @@ for c in range(len(conds)):
 
     #Remove 3rd (singleton) dim and save individual time series
     avgData_tosave = np.squeeze(avgData) 
-    np.savetxt(save_dir + conds[c] + '_avgData_' + group + '.txt', avgData_tosave, delimiter =',')
-    np.save(save_dir + conds[c] + '_avgData_' + group, avgData_tosave) 
+    np.savetxt(save_dir + 'A1/' + conds[c] + '_avgData_' + group + '.txt', avgData_tosave, delimiter =',')
+    np.save(save_dir + 'A1/' + conds[c] + '_avgData_' + group, avgData_tosave) 
