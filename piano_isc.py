@@ -15,8 +15,11 @@ import pandas as pd
 #subjs = ['sub-103','sub-105','sub-108','sub-117','sub-120','sub-121', 'sub-122', 'sub-123']
 #groups = ['AM', 'M', 'M', 'M', 'AM', 'M', 'M', 'AM']
 
-group = 'M'
-subjs = ['sub-105', 'sub-117', 'sub-121', 'sub-122']
+group = 'AM'
+subjs = ['sub-103', 'sub-120', 'sub-123']
+
+#group = 'M'
+#subjs = ['sub-105', 'sub-117', 'sub-121', 'sub-122']
 
 datadir = '/tigress/epiazza/keyboard/data/'
 save_dir = '/tigress/epiazza/keyboard/results/isc/'
@@ -58,9 +61,9 @@ for c in range(len(conds)):
     # Run ISC!!!        
     iscs = isc(avgData, pairwise=False)
     # Save ISCs 
-    np.save(save_dir + conds[c] + '_iscs_' + group, iscs) 
+    np.save(save_dir + 'A1_pieman/' + conds[c] + '_iscs_' + group, iscs) 
 
     #Remove 3rd (singleton) dim and save individual time series
     avgData_tosave = np.squeeze(avgData) 
-    np.savetxt(save_dir + 'A1/' + conds[c] + '_avgData_' + group + '.txt', avgData_tosave, delimiter =',')
-    np.save(save_dir + 'A1/' + conds[c] + '_avgData_' + group, avgData_tosave) 
+    np.savetxt(save_dir + 'A1_pieman/' + conds[c] + '_avgData_' + group + '.txt', avgData_tosave, delimiter =',')
+    np.save(save_dir + 'A1_pieman/' + conds[c] + '_avgData_' + group, avgData_tosave) 
