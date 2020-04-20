@@ -15,6 +15,8 @@ import pandas as pd
 #subjs = ['sub-103','sub-105','sub-108','sub-117','sub-120','sub-121', 'sub-122', 'sub-123']
 #groups = ['AM', 'M', 'M', 'M', 'AM', 'M', 'M', 'AM']
 
+ROI = 'Erez_DMN'
+
 group = 'AM'
 subjs = ['sub-103', 'sub-120', 'sub-123']
 
@@ -34,6 +36,7 @@ conds = ['I', '8B', '2B', '1B']
 TR = 1.7
 high_pass = 0.01
 nRuns = 18
+nReps = 3
 nTR = 148
 
 # Structure data for brainiak isc function
@@ -46,24 +49,32 @@ for c in range(len(conds)):
         # Select indices corresponding to current condition
         idx = np.where(subj_col == conds[c])[0] + 1
         # Initialize structure for storing average run data across subjects
-        avgRuns = np.empty((nTR,mask_size))    
+        avgRuns = np.empty((nTR,mask_size))
+        indvReps = np.empty((nTR, mask_size, len(subjs), nReps))    
         for r in range(len(idx)):
             # Load run data 
             runData = nib.load(datadir + subjs[s] + '/clean_data/clean_data_run' + str(idx[r]) + '.nii.gz')
             # Mask data
             masked_data = apply_mask(runData, mask)
+            # Put masked data for this rep into data structure
+            indvReps[:,:,s,r] = masked_data
             # Average current run into existing data structure
             avgRuns += masked_data/len(idx)
         # Store average run data for each subject separately
-        data[:,:,s] = avgRuns       
+        data[:,:,s] = avgRuns  
+
+    #Save (voxel-averaged) rep-specific data
+    avgData_indvReps = np.mean(indvReps,axis=1,keepdims=False)
+    np.save(save_dir + ROI + '/' + conds[c] + '_avgData_indvReps_' + group, avgData_indvReps)    
+           
     # Average over all voxels before feeding to ISC   
     avgData = np.mean(data,axis=1,keepdims=True) 
     # Run ISC!!!        
     iscs = isc(avgData, pairwise=False)
     # Save ISCs 
-    np.save(save_dir + 'A1_pieman/' + conds[c] + '_iscs_' + group, iscs) 
+    np.save(save_dir + ROI + '/' + conds[c] + '_iscs_' + group, iscs) 
 
     #Remove 3rd (singleton) dim and save individual time series
     avgData_tosave = np.squeeze(avgData) 
-    np.savetxt(save_dir + 'A1_pieman/' + conds[c] + '_avgData_' + group + '.txt', avgData_tosave, delimiter =',')
-    np.save(save_dir + 'A1_pieman/' + conds[c] + '_avgData_' + group, avgData_tosave) 
+    np.savetxt(save_dir + ROI + '/' + conds[c] + '_avgData_' + group + '.txt', avgData_tosave, delimiter =',')
+    np.save(save_dir + ROI + '/' + conds[c] + '_avgData_' + group, avgData_tosave) 
