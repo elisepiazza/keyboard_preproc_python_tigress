@@ -7,7 +7,7 @@ import nilearn.masking
 custom_mask = nib.load('/tigress/epiazza/keyboard/rois/custom_mask.nii.gz')
 
 # load data to be resampled
-input_data = nib.load('/tigress/epiazza/keyboard/rois/a1plus_2mm.nii.gz')
+input_data = nib.load('/tigress/epiazza/keyboard/rois/Middle_Frontal_Gyrus_bin.nii.gz')
 
 img_in_mm_space = resample_img(input_data, target_affine=custom_mask.affine,
                                target_shape=(65, 77, 65))
@@ -28,5 +28,5 @@ img.header['cal_max'] = maxval
 mask_lst = [custom_mask, img]
 custom_resampled_msk = nilearn.masking.intersect_masks(mask_lst,threshold=1)
 
-nib.save(custom_resampled_msk, '/tigress/epiazza/keyboard/rois/a1plus_3mm_custom.nii.gz')
+nib.save(custom_resampled_msk, '/tigress/epiazza/keyboard/rois/MiddleFrontalGyrus_3mm_custom.nii')
 
