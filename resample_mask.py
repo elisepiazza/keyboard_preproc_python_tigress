@@ -6,7 +6,7 @@ from nilearn.image import resample_img
 output_affine = nib.load('/tigress/epiazza/keyboard/rois/MNI152_T1_3mm_brain.nii.gz').affine
 
 # load data to be resampled
-input_data = nib.load('/tigress/jamalw/MES/data/erez_dmna_network_2mm_bin_fixed.nii')
+input_data = nib.load('/tigress/epiazza/keyboard/rois/vmPFC_mask.nii.gz')
 
 img_in_mm_space = resample_img(input_data, target_affine=output_affine,
                                target_shape=(65, 77, 65))
@@ -22,6 +22,6 @@ minval = np.min(mask_bin)
 img = nib.Nifti1Image(mask_bin, affine=output_affine)
 img.header['cal_min'] = minval
 img.header['cal_max'] = maxval
-nib.save(img, '/tigress/epiazza/keyboard/rois/erez_dmna_3mm_bin.nii.gz')
+nib.save(img, '/tigress/epiazza/keyboard/rois/vmPFC_mask_3mm.nii.gz')
 
 
