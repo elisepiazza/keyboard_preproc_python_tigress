@@ -23,12 +23,12 @@ subjs = ['sub-103', 'sub-120', 'sub-123']
 #group = 'M'
 #subjs = ['sub-105', 'sub-117', 'sub-121', 'sub-122']
 
-datadir = '/tigress/jamalw/keyboard/data/'
-save_dir = '/tigress/jamalw/keyboard/results/isc/'
+datadir = '/tigress/epiazza/keyboard/data/'
+save_dir = '/tigress/epiazza/keyboard/results/isc/'
 
-mask = nib.load('/tigress/jamalw/keyboard/rois/a1plus_3mm_custom.nii.gz')
+mask = nib.load('/tigress/epiazza/keyboard/rois/a1plus_3mm_custom.nii.gz')
 mask_size = mask.get_data()[mask.get_data()==1].shape[0]
-condition_data = pd.read_csv('/tigress/jamalw/keyboard/data/Conditions.csv')
+condition_data = pd.read_csv('/tigress/epiazza/keyboard/data/Conditions.csv')
 
 conds = ['I', '8B', '2B', '1B']
 
