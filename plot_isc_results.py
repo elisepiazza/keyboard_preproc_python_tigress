@@ -2,9 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
 
-datadir = '/tigress/epiazza/keyboard/results/isc/'
+ROI = 'Erez_DMN'
+group = 'AM'
 
-group = 'M'
+datadir = '/tigress/epiazza/keyboard/results/isc/' + ROI +'/'
+
 conds = ['I', '8B', '2B', '1B']
 
 
@@ -20,7 +22,7 @@ avgData = [np.mean(ISC_I),np.mean(ISC_8B),np.mean(ISC_2B),np.mean(ISC_1B)]
 semData = [stats.sem(ISC_I,axis=None,ddof=0),stats.sem(ISC_8B,axis=None,ddof=0),stats.sem(ISC_2B,axis=None,ddof=0),stats.sem(ISC_1B,axis=None,ddof=0)]
 plt.bar(x,avgData,yerr=semData)
 plt.xticks(x,('I','8B','2B','1B'),fontsize=15)
-plt.title('ISC Across Scrambled Conditions (rA1)',fontsize=20)
+plt.title(['ISC Across Scrambled Conditions (' + ROI + ')'],fontsize=20)
 plt.ylabel('ISC (r)',fontsize=15)
 plt.tight_layout()
-plt.savefig(datadir + 'isc_results_rA1_' + group)
+plt.savefig(datadir + 'isc_results_' + ROI + '_' + group)
