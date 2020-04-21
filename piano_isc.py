@@ -15,7 +15,7 @@ import pandas as pd
 #subjs = ['sub-103','sub-105','sub-108','sub-117','sub-120','sub-121', 'sub-122', 'sub-123']
 #groups = ['AM', 'M', 'M', 'M', 'AM', 'M', 'M', 'AM']
 
-ROI = 'Erez_DMN'
+ROI = 'a1plus'
 
 group = 'AM'
 subjs = ['sub-103', 'sub-120', 'sub-123']
@@ -26,7 +26,7 @@ subjs = ['sub-103', 'sub-120', 'sub-123']
 datadir = '/tigress/epiazza/keyboard/data/'
 save_dir = '/tigress/epiazza/keyboard/results/isc/'
 
-mask = nib.load('/tigress/epiazza/keyboard/rois/pieman_a1_3mm.nii.gz')
+mask = nib.load('/tigress/epiazza/keyboard/rois/a1plus_3mm_custom.nii.gz')
 mask_size = mask.get_data()[mask.get_data()==1].shape[0]
 condition_data = pd.read_csv('/tigress/epiazza/keyboard/data/Conditions.csv')
 
