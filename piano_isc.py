@@ -17,11 +17,12 @@ import pandas as pd
 
 ROI = 'AngularGyrus'
 
-group = 'AM'
-subjs = ['sub-103', 'sub-120', 'sub-123']
+#group = 'AM'
+#subjs = ['sub-103', 'sub-120', 'sub-123']
 
-#group = 'M'
-#subjs = ['sub-105', 'sub-117', 'sub-121', 'sub-122']
+group = 'M'
+subjs = ['sub-105', 'sub-117', 'sub-121', 'sub-122']
+
 
 datadir = '/tigress/epiazza/keyboard/data/'
 save_dir = '/tigress/epiazza/keyboard/results/isc/'
@@ -30,13 +31,14 @@ mask = nib.load('/tigress/epiazza/keyboard/rois/AngularGyrus_3mm_custom.nii.gz')
 mask_size = mask.get_data()[mask.get_data()==1].shape[0]
 condition_data = pd.read_csv('/tigress/epiazza/keyboard/data/Conditions.csv')
 
-conds = ['I', '8B', '2B', '1B']
+#conds = ['I', '8B', '2B', '1B']
+conds = ['I_A', 'I_I']
 
 
 TR = 1.7
 high_pass = 0.01
 nRuns = 18
-nReps = 3
+nReps = 2
 nTR = 148
 
 # Structure data for brainiak isc function
