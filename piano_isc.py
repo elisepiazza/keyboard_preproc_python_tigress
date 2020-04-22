@@ -31,14 +31,14 @@ mask = nib.load('/tigress/epiazza/keyboard/rois/AngularGyrus_3mm_custom.nii.gz')
 mask_size = mask.get_data()[mask.get_data()==1].shape[0]
 condition_data = pd.read_csv('/tigress/epiazza/keyboard/data/Conditions.csv')
 
-#conds = ['I', '8B', '2B', '1B']
-conds = ['I_A', 'I_I']
+conds = ['I', '8B', '2B', '1B']
+#conds = ['I_A', 'I_I']
 
 
 TR = 1.7
 high_pass = 0.01
 nRuns = 18
-nReps = 2
+nReps = 3
 nTR = 148
 
 # Structure data for brainiak isc function
