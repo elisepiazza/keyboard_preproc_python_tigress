@@ -4,7 +4,7 @@ import nibabel as nib
 from scipy.spatial import distance
 import os
 
-subjs = ['sub-103', 'sub-105', 'sub-117','sub-120', 'sub-121', 'sub-122', 'sub-123']
+subjs = ['sub-103', 'sub-105', 'sub-115', 'sub-117','sub-120', 'sub-121', 'sub-122', 'sub-123']
 
 s = int(sys.argv[1])
 
@@ -28,7 +28,7 @@ for i in range(nRuns):
     print('Data Loaded')
     
     ## create searchlight input run directory
-    os.mkdir(datadir + subjs[s] + '/searchlight_input/run' + str(i+1))
+    #os.mkdir(datadir + subjs[s] + '/searchlight_input/run' + str(i+1))
  
     x,y,z = np.mgrid[[slice(dm) for dm in run.shape[0:3]]] 
     x = np.reshape(x,(x.shape[0]*x.shape[1]*x.shape[2]))
