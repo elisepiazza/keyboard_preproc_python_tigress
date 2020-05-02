@@ -2,8 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
 
-ROI = 'Erez_DMN'
-group = 'AM'
+ROI = 'vmPFC'
+group = 'M'
 
 datadir = '/tigress/epiazza/keyboard/results/isc/' + ROI +'/'
 
