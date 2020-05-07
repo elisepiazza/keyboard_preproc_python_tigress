@@ -2,7 +2,7 @@ import numpy as np
 import sys
 import nibabel as nib
 
-subjs = ['sub-103','sub-105', 'sub-115', 'sub-117', 'sub-120', 'sub-121', 'sub-122', 'sub-123']
+subjs = ['sub-103','sub-105', 'sub-108', 'sub-115', 'sub-117', 'sub-120', 'sub-121', 'sub-122', 'sub-123']
 
 task_fn = '_ses-01_task-keyboard_run-'
 mask_fn_suffix = '_space-MNI152NLin2009cAsym_desc-brain_mask.nii.gz'
