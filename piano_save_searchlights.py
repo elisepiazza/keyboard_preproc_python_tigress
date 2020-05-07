@@ -4,7 +4,7 @@ import nibabel as nib
 from scipy.spatial import distance
 import os
 
-subjs = ['sub-103', 'sub-105', 'sub-115', 'sub-117','sub-120', 'sub-121', 'sub-122', 'sub-123']
+subjs = ['sub-103', 'sub-105', 'sub-108', 'sub-115', 'sub-117', 'sub-120', 'sub-121', 'sub-122', 'sub-123']
 
 s = int(sys.argv[1])
 
