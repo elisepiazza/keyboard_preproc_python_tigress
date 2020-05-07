@@ -10,9 +10,11 @@ s = int(sys.argv[1])
 
 datadir = "/tigress/epiazza/keyboard/data/"
 
+subj_ids = 'sub-108'
 #subj_ids = ['sub-122', 'sub-123']
 #subj_ids = ['sub-103', 'sub-105', 'sub-108', 'sub-117', 'sub-120', 'sub-121']
-subj_ids = ['sub-103', 'sub-105', 'sub-115', 'sub-117', 'sub-120', 'sub-121', 'sub-122', 'sub-123']
+#subj_ids = ['sub-103', 'sub-105', 'sub-108', 'sub-115', 'sub-117', 'sub-120', 'sub-121', 'sub-122', 'sub-123']
+
 
 task_fn1 = '_ses-01_task-keyboard_run-'
 task_fn2 = '_space-MNI152NLin2009cAsym_desc-preproc_bold.nii.gz'
