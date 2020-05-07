@@ -15,24 +15,24 @@ import pandas as pd
 #subjs = ['sub-103','sub-105','sub-108', 'sub-115', sub-117','sub-120','sub-121', 'sub-122', 'sub-123']
 #groups = ['AM', 'M', 'M', 'AM', 'M', 'AM', 'M', 'M', 'AM']
 
-ROI = 'vmPFC'
+ROI = 'Precuneus'
 
-group = 'AM'
-subjs = ['sub-103', 'sub-115', 'sub-120', 'sub-123']
+#group = 'AM'
+#subjs = ['sub-103', 'sub-115', 'sub-120', 'sub-123']
 
-#group = 'M'
-#subjs = ['sub-105', 'sub-117', 'sub-121', 'sub-122']
+group = 'M'
+subjs = ['sub-105', 'sub-108', 'sub-117', 'sub-121', 'sub-122']
 
 
 datadir = '/tigress/epiazza/keyboard/data/'
 save_dir = '/tigress/epiazza/keyboard/results/isc/'
 
-mask = nib.load('/tigress/epiazza/keyboard/rois/vmPFC_3mm_custom.nii')
+mask = nib.load('/tigress/epiazza/keyboard/rois/Precuneus_3mm_custom.nii')
 mask_size = mask.get_data()[mask.get_data()==1].shape[0]
 condition_data = pd.read_csv('/tigress/epiazza/keyboard/data/Conditions.csv')
 
-conds = ['I', '8B', '2B', '1B']
-#conds = ['I_A', 'I_I']
+#conds = ['I', '8B', '2B', '1B']
+conds = ['I_A', 'I_I']
 
 
 TR = 1.7
