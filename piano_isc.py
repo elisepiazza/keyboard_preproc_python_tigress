@@ -66,18 +66,21 @@ for c in range(len(conds)):
         # Store averaged run data for each subject separately
         data[:,:,s] = np.mean(Runs3D,axis=2)  
 
+    #Save rep-specific data (all voxels)
+    np.save(save_dir + ROI + '/' + conds[c] + '_data_indvReps_' + group, data_indvReps)
+
     #Save (voxel-averaged) rep-specific data
     avgData_indvReps = np.mean(data_indvReps,axis=1,keepdims=False)
-    np.save(save_dir + ROI + '/' + conds[c] + '_avgData_indvReps_' + group, avgData_indvReps)   
+    #np.save(save_dir + ROI + '/' + conds[c] + '_avgData_indvReps_' + group, avgData_indvReps)   
 
     # Average over all voxels before feeding to ISC   
     avgData = np.mean(data,axis=1,keepdims=True) 
     # Run ISC!!!        
     iscs = isc(avgData, pairwise=False)
     # Save ISCs 
-    np.save(save_dir + ROI + '/' + conds[c] + '_iscs_' + group, iscs) 
+    #np.save(save_dir + ROI + '/' + conds[c] + '_iscs_' + group, iscs) 
 
     #Remove 3rd (singleton) dim and save rep-averaged data
     avgData_tosave = np.squeeze(avgData) 
-    np.savetxt(save_dir + ROI + '/' + conds[c] + '_avgData_' + group + '.txt', avgData_tosave, delimiter =',')
-    np.save(save_dir + ROI + '/' + conds[c] + '_avgData_' + group, avgData_tosave) 
+    #np.savetxt(save_dir + ROI + '/' + conds[c] + '_avgData_' + group + '.txt', avgData_tosave, delimiter =',')
+    #np.save(save_dir + ROI + '/' + conds[c] + '_avgData_' + group, avgData_tosave) 
