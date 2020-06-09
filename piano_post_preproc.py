@@ -10,10 +10,10 @@ s = int(sys.argv[1])
 
 datadir = "/tigress/epiazza/keyboard/data/"
 
-subj_ids = ['sub-108']
+#subj_ids = ['sub-108']
 #subj_ids = ['sub-122', 'sub-123']
 #subj_ids = ['sub-103', 'sub-105', 'sub-108', 'sub-117', 'sub-120', 'sub-121']
-#subj_ids = ['sub-103', 'sub-105', 'sub-108', 'sub-115', 'sub-117', 'sub-120', 'sub-121', 'sub-122', 'sub-123']
+subj_ids = ['sub-103', 'sub-105', 'sub-108', 'sub-115', 'sub-117', 'sub-120', 'sub-121', 'sub-122', 'sub-123']
 
 
 task_fn1 = '_ses-01_task-keyboard_run-'
@@ -25,7 +25,7 @@ confounds_suffix = '_desc-confounds_regressors.tsv'
 
 # high pass filter data
 TR = 1.7
-high_pass = 0.01
+high_pass = 0.03
 numRuns = 18
 
 for s in range(len(subj_ids)):
@@ -68,7 +68,7 @@ for s in range(len(subj_ids)):
         img.header['cal_max'] = maxval
 
         #save preprocessed data
-        nib.save(img,datadir + subj_ids[s] + '/clean_data/clean_data_run' + str(r+1) + '.nii.gz')
+        nib.save(img,datadir + subj_ids[s] + '/clean_data_.03Hz/clean_data_run' + str(r+1) + '.nii.gz')
 
 		
 
