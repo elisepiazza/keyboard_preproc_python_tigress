@@ -15,7 +15,7 @@ import pandas as pd
 #subjs = ['sub-103','sub-105','sub-108', 'sub-115', sub-117','sub-120','sub-121', 'sub-122', 'sub-123']
 #groups = ['AM', 'M', 'M', 'AM', 'M', 'AM', 'M', 'M', 'AM']
 
-ROI = 'vmPFC'
+ROI = 'AngularGyrus'
 
 group = 'AM'
 subjs = ['sub-103', 'sub-115', 'sub-120', 'sub-123']
@@ -23,20 +23,19 @@ subjs = ['sub-103', 'sub-115', 'sub-120', 'sub-123']
 #group = 'M'
 #subjs = ['sub-105', 'sub-108', 'sub-117', 'sub-121', 'sub-122']
 
-
 datadir = '/tigress/epiazza/keyboard/data/'
-save_dir = '/tigress/epiazza/keyboard/results/isc/'
+save_dir = '/tigress/epiazza/keyboard/results/isc_.06Hz/'
 
-mask = nib.load('/tigress/epiazza/keyboard/rois/vmPFC_3mm_custom.nii')
+mask = nib.load('/tigress/epiazza/keyboard/rois/AngularGyrus_3mm_custom.nii.gz')
 mask_size = mask.get_data()[mask.get_data()==1].shape[0]
 condition_data = pd.read_csv('/tigress/epiazza/keyboard/data/Conditions.csv')
 
-#conds = ['I', '8B', '2B', '1B']
-conds = ['I_A', 'I_I']
+conds = ['I', '8B', '2B', '1B']
+#conds = ['I_N', 'I_A', 'I_I']
 
 
 TR = 1.7
-high_pass = 0.01
+high_pass = 0.03
 nRuns = 18
 nReps = 3
 nTR = 148
@@ -56,7 +55,7 @@ for c in range(len(conds)):
         Runs3D = np.empty((nTR,mask_size,nReps)) 
         for r in range(len(idx)):
             # Load run data 
-            runData = nib.load(datadir + subjs[s] + '/clean_data/clean_data_run' + str(idx[r]) + '.nii.gz')
+            runData = nib.load(datadir + subjs[s] + '/clean_data_.06Hz/clean_data_run' + str(idx[r]) + '.nii.gz')
             # Mask data
             masked_data = apply_mask(runData, mask)
             # store masked data for each run separately
