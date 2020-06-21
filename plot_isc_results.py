@@ -5,7 +5,7 @@ from scipy import stats
 ROI = 'Precuneus'
 group = 'AM'
 
-datadir = '/tigress/epiazza/keyboard/results/isc_.06Hz/' + ROI +'/'
+datadir = '/tigress/epiazza/keyboard/results/isc_.01Hz/' + ROI +'/'
 
 conds = ['1B', '2B', '8B', 'I']
 
